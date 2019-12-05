@@ -1,24 +1,22 @@
 package crm.dao;
 
-import crm.model.User;
+import crm.model.Company;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserDaoImpl implements UserDao {
-
+public class CompanyDaoImpl implements CompanyDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Override
-    public void addUser(User user) {
+    public void addCompany(Company company) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            session.save(user);
+            session.saveOrUpdate(company);
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -32,16 +30,15 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserByUserId(int userId) {
-        User user = null;
+    public Company getCompanyByCompanyId(int companyId) {
+        Company user = null;
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            user = (User) session.get(User.class, userId);
+            user = (Company) session.get(Company.class, companyId);
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return user;
-     }
-
+    }
 }

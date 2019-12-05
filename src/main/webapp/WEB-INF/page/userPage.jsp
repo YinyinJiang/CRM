@@ -11,5 +11,6 @@
 </head>
 <body>
 <span>${user.name}</span>
+<img src="<c:url value="/resource/images/editor/cursor.png"/>" />
 </body>
 </html>

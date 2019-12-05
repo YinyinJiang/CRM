@@ -3,10 +3,7 @@ package crm;
 import java.util.ArrayList;
 import java.util.List;
 
-import crm.ApplicationConfig;
-import crm.model.Category;
 import crm.model.Company;
-import crm.model.Lead;
 import crm.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
