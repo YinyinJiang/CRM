@@ -7,29 +7,29 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Categories")
+@Table(name = "Category")
 public class Category implements Serializable {
 
     private static final long serialVersionUID = 7868678678867231L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int categoryId;
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Project project;
+    @JoinColumn(name = "projectId")
+    private Project categoryProject;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST})
-    private List<SubScore> companyList = new ArrayList<>();
+    @ManyToMany(mappedBy = "companyCategoryList", cascade = {CascadeType.PERSIST})
+    private List<Company> categoryCompanyList = new ArrayList<>();
 
-    public int getId() {
-        return id;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getName() {
@@ -40,20 +40,20 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public Project getProject() {
-        return project;
+    public Project getCategoryProject() {
+        return categoryProject;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setCategoryProject(Project categoryProject) {
+        this.categoryProject = categoryProject;
     }
 
-    public List<SubScore> getCompanyList() {
-        return companyList;
+    public List<Company> getCategoryCompanyList() {
+        return categoryCompanyList;
     }
 
-    public void setCompanyList(List<SubScore> companyList) {
-        this.companyList = companyList;
+    public void setCategoryCompanyList(List<Company> categoryCompanyList) {
+        this.categoryCompanyList = categoryCompanyList;
     }
 
 

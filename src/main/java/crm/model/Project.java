@@ -8,14 +8,14 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "companies")
+@Table(name = "Project")
 public class Project implements Serializable {
 
     private static final long serialVersionUID = 23764276131283820L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int projectId;
     private String name;
     private java.sql.Timestamp createTime;
     private java.sql.Timestamp endTime;
@@ -25,25 +25,25 @@ public class Project implements Serializable {
     private boolean status;
 
     @ManyToOne
-    @JoinColumn(name = "lead_id")
-    private Lead lead;
+    @JoinColumn(name = "leadId")
+    private Lead projectLead;
 
     @ManyToMany(cascade = {CascadeType.PERSIST})
     private List<SubScore> projectSubScoreList = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "company_id")
-    private Company project_company;
+    @JoinColumn(name = "companyId")
+    private Company projectCompany;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    private List<Category> categoryList = new ArrayList<>();
+    @OneToMany(mappedBy = "categoryProject", cascade = CascadeType.ALL)
+    private List<Category> projectCategoryList = new ArrayList<>();
 
-    public int getId() {
-        return id;
+    public int getProjectId() {
+        return projectId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
     public String getName() {
@@ -102,12 +102,28 @@ public class Project implements Serializable {
         this.status = status;
     }
 
-    public Lead getLead() {
-        return lead;
+    public Lead getProjectLead() {
+        return projectLead;
     }
 
-    public void setLead(Lead lead) {
-        this.lead = lead;
+    public void setProjectLead(Lead projectLead) {
+        this.projectLead = projectLead;
+    }
+
+    public Company getProjectCompany() {
+        return projectCompany;
+    }
+
+    public void setProjectCompany(Company projectCompany) {
+        this.projectCompany = projectCompany;
+    }
+
+    public List<Category> getProjectCategoryList() {
+        return projectCategoryList;
+    }
+
+    public void setProjectCategoryList(List<Category> projectCategoryList) {
+        this.projectCategoryList = projectCategoryList;
     }
 
     public List<SubScore> getProjectSubScoreList() {
@@ -116,21 +132,5 @@ public class Project implements Serializable {
 
     public void setProjectSubScoreList(List<SubScore> projectSubScoreList) {
         this.projectSubScoreList = projectSubScoreList;
-    }
-
-    public Company getProject_company() {
-        return project_company;
-    }
-
-    public void setProject_company(Company project_company) {
-        this.project_company = project_company;
-    }
-
-    public List<Category> getCategoryList() {
-        return categoryList;
-    }
-
-    public void setCategoryList(List<Category> categoryList) {
-        this.categoryList = categoryList;
     }
 }

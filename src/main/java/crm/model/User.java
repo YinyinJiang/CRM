@@ -7,28 +7,28 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "User")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 2681531852204068105L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int userId;
     private String email;
     private String password;
     private String name;
     private boolean enabled;
 
     @ManyToMany(cascade = {CascadeType.PERSIST})
-    private List<Company> companyList = new ArrayList<>();
+    private List<Company> userCompanyList = new ArrayList<>();
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getEmail() {
@@ -63,11 +63,11 @@ public class User implements Serializable {
         this.enabled = enabled;
     }
 
-    public List<Company> getCompanyList() {
-        return companyList;
+    public List<Company> getUserCompanyList() {
+        return userCompanyList;
     }
 
-    public void setCompanyList(List<Company> companyList) {
-        this.companyList = companyList;
+    public void setUserCompanyList(List<Company> userCompanyList) {
+        this.userCompanyList = userCompanyList;
     }
 }

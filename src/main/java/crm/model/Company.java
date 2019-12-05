@@ -7,72 +7,41 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "companies")
+@Table(name = "Company")
 public class Company implements Serializable {
 
     private static final long serialVersionUID = 137283246732432L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int companyId;
+
     private String name;
     private String contact;
     private String phone;
 
-    @ManyToMany(mappedBy = "companyList")
-    private List<User> chargers = new ArrayList<>();
+    @ManyToMany(mappedBy = "userCompanyList")
+    private List<User> companyUserList = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST})
     private List<SubScore> companySubScoreList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "lead_company", cascade = CascadeType.ALL)
-    private List<Lead> leadList = new ArrayList<>();
+    @OneToMany(mappedBy = "leadCompany", cascade = CascadeType.ALL)
+    private List<Lead> companyLeadList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "project_company", cascade = CascadeType.ALL)
-    private List<Lead> projectList = new ArrayList<>();
-
-    public List<User> getChargers() {
-        return chargers;
-    }
-
-    public void setChargers(List<User> chargers) {
-        this.chargers = chargers;
-    }
-
-    public List<SubScore> getCompanySubScoreList() {
-        return companySubScoreList;
-    }
-
-    public void setCompanySubScoreList(List<SubScore> companySubScoreList) {
-        this.companySubScoreList = companySubScoreList;
-    }
-
-    public List<Lead> getLeadList() {
-        return leadList;
-    }
-
-    public void setLeadList(List<Lead> leadList) {
-        this.leadList = leadList;
-    }
-
-    public List<Lead> getProjectList() {
-        return projectList;
-    }
-
-    public void setProjectList(List<Lead> projectList) {
-        this.projectList = projectList;
-    }
-
-    public List<SubScore> getCategoryList() {
-        return categoryList;
-    }
-
-    public void setCategoryList(List<SubScore> categoryList) {
-        this.categoryList = categoryList;
-    }
+    @OneToMany(mappedBy = "projectCompany", cascade = CascadeType.ALL)
+    private List<Project> companyProjectList = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST})
-    private List<SubScore> categoryList = new ArrayList<>();
+    private List<Category> companyCategoryList = new ArrayList<>();
+
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
+    }
 
     public String getName() {
         return name;
@@ -96,5 +65,45 @@ public class Company implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public List<User> getCompanyUserList() {
+        return companyUserList;
+    }
+
+    public void setCompanyUserList(List<User> companyUserList) {
+        this.companyUserList = companyUserList;
+    }
+
+    public List<Lead> getCompanyLeadList() {
+        return companyLeadList;
+    }
+
+    public void setCompanyLeadList(List<Lead> companyLeadList) {
+        this.companyLeadList = companyLeadList;
+    }
+
+    public List<Project> getCompanyProjectList() {
+        return companyProjectList;
+    }
+
+    public void setCompanyProjectList(List<Project> companyProjectList) {
+        this.companyProjectList = companyProjectList;
+    }
+
+    public List<Category> getCompanyCategoryList() {
+        return companyCategoryList;
+    }
+
+    public void setCompanyCategoryList(List<Category> companyCategoryList) {
+        this.companyCategoryList = companyCategoryList;
+    }
+
+    public List<SubScore> getCompanySubScoreList() {
+        return companySubScoreList;
+    }
+
+    public void setCompanySubScoreList(List<SubScore> companySubScoreList) {
+        this.companySubScoreList = companySubScoreList;
     }
 }

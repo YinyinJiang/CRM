@@ -1,31 +1,33 @@
 package crm.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "Subscore")
 public class SubScore {
 
     private static final long serialVersionUID = 37453723943454989L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int subScoreId;
     private String type;
     private float score;
 
     @ManyToMany(mappedBy = "projectSubScoreList")
     private List<Project> subScoreProjectList = new ArrayList<>();
 
-    public int getId() {
-        return id;
+    @ManyToMany(mappedBy = "companySubScoreList")
+    private List<Company> subScoreCompanyList = new ArrayList<>();
+
+    public int getSubScoreId() {
+        return subScoreId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSubScoreId(int subScoreId) {
+        this.subScoreId = subScoreId;
     }
 
     public String getType() {
@@ -59,7 +61,4 @@ public class SubScore {
     public void setSubScoreCompanyList(List<Company> subScoreCompanyList) {
         this.subScoreCompanyList = subScoreCompanyList;
     }
-
-    @ManyToMany(mappedBy = "companySubScoreList")
-    private List<Company> subScoreCompanyList = new ArrayList<>();
 }

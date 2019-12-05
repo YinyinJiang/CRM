@@ -9,25 +9,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "authorities")
+@Table(name = "Authority")
 public class Authorities implements Serializable {
 
     private static final long serialVersionUID = 8734140534986494039L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int authorityId;
 
     private String emailId;
 
     private String authorities;
 
-    public int getId() {
-        return id;
+    public int getAuthorityId() {
+        return authorityId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setAuthorityId(int authorityId) {
+        this.authorityId = authorityId;
     }
 
     public String getEmailId() {

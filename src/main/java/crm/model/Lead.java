@@ -7,33 +7,33 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "leaders")
+@Table(name = "Lead")
 public class Lead implements Serializable {
 
     private static final long serialVersionUID = 8436097833452420298L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int leadId;
     private String email;
     private String name;
 
     @Column(name = "phone", unique = true)
     private String phone;
 
-    @OneToMany(mappedBy = "lead", cascade = CascadeType.ALL)
-    private List<Project> projectList = new ArrayList<>();
+    @OneToMany(mappedBy = "projectLead", cascade = CascadeType.ALL)
+    private List<Project> leadProjectList = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "company_id")
-    private Company lead_company;
+    @JoinColumn(name = "companyId")
+    private Company leadCompany;
 
-    public int getId() {
-        return id;
+    public int getLeadId() {
+        return leadId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setLeadId(int leadId) {
+        this.leadId = leadId;
     }
 
     public String getEmail() {
@@ -60,19 +60,19 @@ public class Lead implements Serializable {
         this.phone = phone;
     }
 
-    public List<Project> getProjectList() {
-        return projectList;
+    public List<Project> getLeadProjectList() {
+        return leadProjectList;
     }
 
-    public void setProjectList(List<Project> projectList) {
-        this.projectList = projectList;
+    public void setLeadProjectList(List<Project> leadProjectList) {
+        this.leadProjectList = leadProjectList;
     }
 
-    public Company getLead_company() {
-        return lead_company;
+    public Company getLeadCompany() {
+        return leadCompany;
     }
 
-    public void setLead_company(Company lead_company) {
-        this.lead_company = lead_company;
+    public void setLeadCompany(Company leadCompany) {
+        this.leadCompany = leadCompany;
     }
 }
