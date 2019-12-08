@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Item Recommendation">
+  <meta name="author" content="Your Name">
+  <title>Dash Board</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- Font Awesome Icon Library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+  
+<body>
+
+  
+  <div class="container">
+    
+    <section class="main-section">
+      <div class="column left">
+        <p id="company_name" style="color:#0a35aa"><strong>Company Name</strong></p>
+        <hr style="color:#0a35aa">
+
+        <div class="row">
+          <p id="total_score"><strong>Total Score</strong></p>
+          <div id="progress_over_50" class="column left progress-circle over50 p80">
+            <span id="total_score_val">80%</span>
+            <div class="left-half-clipper">
+              <div class="first50-bar"></div>
+              <div class="value-bar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column center">
+        <button id="edit_button" class="change_button">Edit</button>
+      </div>
+      
+      <div class="column right">
+        <table id="myTable">
+          <tr><th>Name</th><th>Score</th></tr>
+          <tr>
+            <td>1. project progress</td>
+            <td id="prog_val">80%</td>
+          </tr>
+          <tr>
+            <td>2. project payment</td>
+            <td id="pay_val">90%</td>
+          </tr>
+          <tr>
+            <td>3. project communication</td>
+            <td id="comm_val">90%</td>
+          </tr>
+        </table>  
+      </div>
+      
+    
+      <div class="row">
+        <div class="columnBottom left">
+          <label for="category"><strong>Category:</strong></label>
+          <p id="category_list"></p>
+        </div>
+        <div class="columnBottom left">
+          <label for="rate"><strong>Rate</strong></label>
+          <div>
+            <span id="start1" class="fa fa-star"></span>
+            <span id="start2" class="fa fa-star"></span>
+            <span id="start3" class="fa fa-star"></span>
+            <span id="start4" class="fa fa-star"></span>
+            <span id="start5" class="fa fa-star"></span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="columnBottom left">
+        <a href="https://www.w3schools.com" id="checkMore">History</a>
+      </div>
+      <div class="columnBottom left">
+        <a href="https://www.w3schools.com" id="checkMore">On Going</a>
+      </div>
+      
+    </section> 
+  </div>
+  
+  
+  <script src="https://rawgit.com/emn178/js-md5/master/build/md5.min.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>
