@@ -21,6 +21,16 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    public void removeCompany(int companyId) {
+        companyDao.removeCompany(companyId);
+    }
+
+    @Override
+    public void updateCompany(int companyId) {
+        companyDao.updateCompany(companyId);
+    }
+
+    @Override
     public Company getCompanyByCompanyId(int companyId) {
         return companyDao.getCompanyByCompanyId(companyId);
     }
@@ -39,4 +49,11 @@ public class CompanyServiceImpl implements CompanyService {
     public List<SubScore> getCompanySubScoreList(int companyId) {
         return companyDao.getCompanySubScoreList(companyId);
     }
+
+    @Override
+    public List<Project> getCompanyHistoryProjectList(int companyId) {
+        return companyDao.getCompanyHistoryProjectList(companyId);
+    }
+
+
 }

@@ -65,4 +65,43 @@ public class ProjectDaoImpl implements ProjectDao {
         }
         return null;
     }
+
+    @Override
+    public void removeProject(int projectId) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            Project project = (Project) session.get(Project.class, projectId);
+            session.delete(project);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public void updatePorject(int projectId) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            Project project = (Project) session.get(Project.class, projectId);
+            session.saveOrUpdate(project);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
 }

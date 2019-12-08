@@ -22,6 +22,10 @@ public class SubScore {
     @ManyToMany(mappedBy = "companySubScoreList")
     private List<Company> subScoreCompanyList = new ArrayList<>();
 
+    public SubScore(float score) {
+        this.score = score;
+    }
+
     public int getSubScoreId() {
         return subScoreId;
     }

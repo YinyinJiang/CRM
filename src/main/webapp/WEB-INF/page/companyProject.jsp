@@ -22,6 +22,7 @@
                 url: "http://localhost:8080/crm/company/getCompanySubScoreList/1",
                 success: function (result) {
                     alert(result['a']);
+                    $("#get_score_button").text = result['a'];
                 },
                 failure: function (result) {
                     alert(result)

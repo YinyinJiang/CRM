@@ -3,7 +3,6 @@ package crm.dao;
 import crm.model.Company;
 import crm.model.Project;
 import crm.model.SubScore;
-import crm.service.CompanyService;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -40,6 +39,44 @@ public class CompanyDaoImpl implements CompanyDao {
     }
 
     @Override
+    public void removeCompany(int companyId) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            Company company = (Company) session.get(Company.class, companyId);
+            session.saveOrUpdate(company);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public void updateCompany(int companyId) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            Company company = (Company) session.get(Company.class, companyId);
+            session.saveOrUpdate(company);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    @Override
     public Company getCompanyByCompanyId(int companyId) {
         Company company = null;
         try (Session session = sessionFactory.openSession()) {
@@ -62,6 +99,11 @@ public class CompanyDaoImpl implements CompanyDao {
             Root<Company> root = criteriaQuery.from(Company.class);
             criteriaQuery.select(root);
             companyList = session.createQuery(criteriaQuery).getResultList();
+            for (Company company : companyList) {
+                if (!Hibernate.isInitialized(company.getCompanySubScoreList())) {
+                    Hibernate.initialize(company.getCompanySubScoreList());
+                }
+            }
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,6 +119,11 @@ public class CompanyDaoImpl implements CompanyDao {
             Company company = (Company) session.get(Company.class, companyId);
             if (!Hibernate.isInitialized(company.getCompanyProjectList()))
                 Hibernate.initialize(company.getCompanyProjectList());
+            for (Project project : company.getCompanyProjectList()) {
+                if (!Hibernate.isInitialized(project.getProjectSubScoreList())) {
+                    Hibernate.initialize(project.getProjectSubScoreList());
+                }
+            }
             companyProjectList = company.getCompanyProjectList();
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -100,7 +147,28 @@ public class CompanyDaoImpl implements CompanyDao {
             e.printStackTrace();
         }
         return companySubScoreList;
+    }
 
+    @Override
+    public List<Project> getCompanyHistoryProjectList(int companyId) {
+        List<Project> companyProjectList = null;
+        List<Project> companyHistoryProjectList = null;
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            Company company = (Company) session.get(Company.class, companyId);
+            if (!Hibernate.isInitialized(company.getCompanyProjectList()))
+                Hibernate.initialize(company.getCompanyProjectList());
+            companyProjectList = company.getCompanyProjectList();
+            for (Project project : companyProjectList) {
+                if (project.isStatus()) {
+                    companyHistoryProjectList.add(project);
+                }
+            }
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return companyHistoryProjectList;
     }
 
 

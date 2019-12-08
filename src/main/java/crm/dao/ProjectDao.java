@@ -8,4 +8,6 @@ public interface ProjectDao {
     void addProject(Project project);
     Project getProject(int projectId);
     List<Project> getProjectList();
+    void removeProject(int projectId);
+    void updatePorject(int projectId);
 }
